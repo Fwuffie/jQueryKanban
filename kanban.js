@@ -17,10 +17,11 @@ class Kanban {
 			$('<div></div>')
 				.addClass('kanban-board')
 				.attr("id", id)
-				.html(
-					$('<div></div>').addClass('kanban-title')
-						.html(title)
-				).appendTo(this.kanbanEL);
+				.html([
+						$('<div></div>').addClass('kanban-title').html(title),
+						$('<div></div>').addClass('kanban-items-container')
+					])
+				.appendTo(this.kanbanEL);
 
 		});
 
@@ -35,7 +36,7 @@ class Kanban {
 			$('<div></div>').addClass('kanban-item')
 				.html(
 					title
-				).appendTo("#" + boardID);
+				).appendTo("#" + boardID + " > .kanban-items-container");
 
 		});
 	}
