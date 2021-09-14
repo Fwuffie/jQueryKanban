@@ -1,0 +1,53 @@
+.kanban-container {
+	overflow-x: scroll;
+
+	/* Apperance */
+	background: lightgray;
+
+	/* Layout */
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	height: 100%;
+	width: 100%;
+
+	/* Spacing */
+}
+
+.kanban-board {
+	/* Apperance */
+	background: gray;
+
+	/* Layout */
+	min-width: 20rem;
+	height: fit-content;
+
+	/* Spacing */
+	margin: 1em;
+    padding: 1em;
+}
+
+.kanban-title {
+	/* Apperance */
+	font-family: sans-serif;
+	font-size: 2em;
+
+	/* Layout */
+	/* Spacing */
+}
+
+.kanban-items-container {
+	/* Apperance */
+	/* Layout */
+	/* Spacing */
+}
+
+.kanban-item {
+	/* Apperance */
+	background: darkgray;
+
+	/* Layout */
+	/* Spacing */
+	padding: 0.5em;
+    margin: 0.5em;
+}
