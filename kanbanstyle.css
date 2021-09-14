@@ -38,8 +38,11 @@
 
 .kanban-items-container {
 	/* Apperance */
+
 	/* Layout */
+
 	/* Spacing */
+	min-height: 2em;
 }
 
 .kanban-item {
