@@ -4,8 +4,10 @@ class Kanban {
 		this.boards = args.boards;
 		this.items = args.items;
 
+		//add css class to div
 		$(this.kanbanEL).addClass('kanban-container');
 
+		//render the boards
 		this.renderBoards();
 	}
 
@@ -19,10 +21,11 @@ class Kanban {
 				.attr("id", id)
 				.html([
 						$('<div></div>').addClass('kanban-title').html(title),
-						$('<div></div>').addClass('kanban-items-container')
+						$('<div></div>').addClass('kanban-items-container').sortable({
+						      connectWith: ".kanban-items-container"
+						    }).disableSelection()
 					])
 				.appendTo(this.kanbanEL);
-
 		});
 
 		this.renderItems()
@@ -40,6 +43,9 @@ class Kanban {
 
 		});
 	}
+
+
+
 }
 
 /*
