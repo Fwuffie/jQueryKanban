@@ -3,12 +3,16 @@ class Kanban {
 		this.kanbanEL = el;
 		this.boards = args.boards;
 		this.items = args.items;
-
+		this.onMove = args.onMove
 		//add css class to div
 		$(this.kanbanEL).addClass('kanban-container');
 
 		//render the boards
 		this.renderBoards();
+	}
+
+	test() {
+		console.log(this);
 	}
 
 	renderBoards() {
@@ -22,8 +26,17 @@ class Kanban {
 				.html([
 						$('<div></div>').addClass('kanban-title').html(title),
 						$('<div></div>').addClass('kanban-items-container').sortable({
-						      connectWith: ".kanban-items-container"
-						    }).disableSelection()
+								connectWith: ".kanban-items-container",
+								stop: function(event, ui) {
+									var itemId = ui.item.data('id');
+
+									var newIndex = ui.item.index();
+									var newBoard = ui.item.parent().parent().attr('id');
+
+									this.items[itemId].boardId = newBoard;
+									this.onMove(this.items[itemId], itemId)
+								}.bind(this)
+							}).disableSelection()
 					])
 				.appendTo(this.kanbanEL);
 		});
@@ -32,11 +45,11 @@ class Kanban {
 	}
 
 	renderItems() {
-		this.items.forEach((item) => {
+		this.items.forEach((item, itemId) => {
 			const title = item.title;
 			const boardID = item.boardId;
 
-			$('<div></div>').addClass('kanban-item')
+			$('<div></div>').addClass('kanban-item').data('id', itemId)
 				.html(
 					title
 				).appendTo("#" + boardID + " > .kanban-items-container");
@@ -47,20 +60,3 @@ class Kanban {
 
 
 }
-
-/*
-	Args:
-
-	{
-		"boards": [
-			{"id": <boardID>, "title": <title>},
-			{"id": <boardID>, "title": <title>},
-			{"id": <boardID>, "title": <title>}
-		]
-		"items": [
-			{"boardId": <boardID>, "title": <title>},
-			{"boardId": <boardID>, "title": <title>},
-			{"boardId": <boardID>, "title": <title>}
-		]
-	}
-*/

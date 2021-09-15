@@ -13,9 +13,9 @@
 		var k;
 		$(document).ready(() => {
 			k = new Kanban($('#kanban'), {
-				onMove: function(from, to) {
-					console.log(from);
-					console.log(to);
+				onMove: function(item, itemId) {
+					console.log(itemId);
+					console.log(item);
 				},
 				boards: [
 					{"id": 'Board1', "title": 'Board1'},
