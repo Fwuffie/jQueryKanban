@@ -25,6 +25,8 @@ class Kanban {
 		}
 	}
 
+
+
 	enableSideScroll() {
 		$('.kanban-board').on('wheel', (event) => {
 				event.stopPropagation();
@@ -54,9 +56,11 @@ class Kanban {
 
 	renderBoards() {
 		$(this.el).empty();
-		this.boards.forEach((board) => {
-			const title = board.title;
-			const id = board.id;
+		Object.entries(this.boards).forEach((board) => {
+			const [boardKey, boardValue] = board;
+
+			const title = boardValue.title;
+			const id = boardKey;
 
 			$('<div></div>')
 				.addClass('kanban-board')
@@ -72,7 +76,17 @@ class Kanban {
 									var newBoard = ui.item.parent().parent().attr('id');
 
 									this.items[itemId].boardId = newBoard;
-									this.onMove(this.items[itemId], itemId)
+
+									var item = {
+										itemId: itemId,
+										itemData: this.items[itemId],
+										itemEl: ui.item,
+										newBoardId: boardKey,
+										newBoardData: boardValue,
+										newBoardEl: ui.item.parent().parent(),
+									}
+
+									this.onMove(item)
 								}.bind(this)
 							})
 							.disableSelection()
