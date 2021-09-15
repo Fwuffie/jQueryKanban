@@ -1,6 +1,6 @@
 # jQueryKanban
-A jQuery based 
 
+A jQuery based kanban plugin.
 
 ## Requirements:
 
