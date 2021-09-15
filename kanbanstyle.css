@@ -47,7 +47,6 @@
 	/* Spacing */
 	min-height: 2em;
 	overflow-y: auto;
-	height: -webkit-fill-available;
 }
 
 .kanban-item {

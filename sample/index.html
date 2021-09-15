@@ -13,6 +13,7 @@
 		var k;
 		$(document).ready(() => {
 			k = new Kanban($('#kanban'), {
+				enableScroll: true,
 				onMove: function(item, itemId) {
 					console.log(itemId);
 					console.log(item);

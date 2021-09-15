@@ -73,13 +73,14 @@ There is an additional
 
 The following is a list of args that can be passed to the kanban:
 
-|    Arg    | Description |
-|    ---    | ----------- |
-| boards    | An array of board objects |
-| items     | An array of item objects |
-| itemFeed  | A url that provides an array of board objects in json format |
-| onClick   | A function that runs onclick |
-| onMove    | A function that runs on moving an item |
+|    Arg       | Description |
+|    ---       | ----------- |
+| boards       | An array of board objects |
+| items        | An array of item objects |
+| itemFeed     | A url that provides an array of board objects in json format |
+| enableScroll | Enable automatic side scrolling on scroll down |
+| onClick      | A function that runs onclick |
+| onMove       | A function that runs on moving an item |
 
 ### Board Args Reference
 

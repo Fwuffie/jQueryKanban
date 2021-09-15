@@ -1,25 +1,39 @@
 class Kanban {
 	constructor(el, args) {
-		this.kanbanEL = el;
+		this.el = el;
+		this.args = args;
 		this.boards = args.boards;
 		this.items = args.items;
 		this.onMove = args.onMove;
 		this.onClick = args.onClick;
 		this.itemFeed = args.itemFeed;
+
 		//add css class to div
-		$(this.kanbanEL).addClass('kanban-container');
+		$(this.el).addClass('kanban-container');
 
 		//render the boards
 		this.renderBoards();
 
-		this.kanbanEL[0].addEventListener('wheel', (evt) => {
-			this.kanbanEL[0].scrollLeft += evt.deltaY
-			event.preventDefault();
-		});
+
+		if (this.args.enableScroll === undefined || this.args.enableScroll) {
+			this.enableSideScroll()
+		}
+		
 
 		if (this.itemFeed) {
 			this.readFeed();
 		}
+	}
+
+	enableSideScroll() {
+		$('.kanban-board').on('wheel', (event) => {
+				event.stopPropagation();
+			})
+
+		$(this.el).on('wheel', (event) => {
+			this.el[0].scrollLeft += event.originalEvent.deltaY
+			event.preventDefault();
+		});
 	}
 
 	readFeed() {
@@ -39,7 +53,7 @@ class Kanban {
 	}
 
 	renderBoards() {
-		$(this.kanbanEL).empty();
+		$(this.el).empty();
 		this.boards.forEach((board) => {
 			const title = board.title;
 			const id = board.id;
@@ -64,7 +78,7 @@ class Kanban {
 							.disableSelection()
 							.click( this.onClick )
 					])
-				.appendTo(this.kanbanEL);
+				.appendTo(this.el);
 		});
 
 		this.renderItems()
