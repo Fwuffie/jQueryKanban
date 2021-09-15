@@ -24,7 +24,10 @@
 
 	/* Spacing */
 	margin: 1em;
-    padding: 1em;
+	padding: 1em;
+	max-height: -webkit-fill-available;
+	display: flex;
+	flex-direction: column;
 }
 
 .kanban-title {
@@ -43,10 +46,13 @@
 
 	/* Spacing */
 	min-height: 2em;
+	overflow-y: auto;
+	height: -webkit-fill-available;
 }
 
 .kanban-item {
 	/* Apperance */
+	font-family: sans-serif;
 	background: darkgray;
 
 	/* Layout */

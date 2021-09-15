@@ -12,6 +12,11 @@ class Kanban {
 		//render the boards
 		this.renderBoards();
 
+		this.kanbanEL[0].addEventListener('wheel', (evt) => {
+			this.kanbanEL[0].scrollLeft += evt.deltaY
+			event.preventDefault();
+		});
+
 		if (this.itemFeed) {
 			this.readFeed();
 		}

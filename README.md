@@ -6,5 +6,3 @@ jQueryUI 1.12.1
 Setup:
 
 initialisation of kanban:
-
-<div id=kanban></div>
