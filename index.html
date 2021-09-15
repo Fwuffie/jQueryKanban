@@ -12,25 +12,20 @@
 	<script>
 		var k;
 		$(document).ready(() => {
+
 			k = new Kanban($('#kanban'), {
 				onMove: function(item, itemId) {
-					console.log(itemId);
-					console.log(item);
+					
+				},
+				onClick: function() {
+					console.log('click')
 				},
 				boards: [
 					{"id": 'Board1', "title": 'Board1'},
 					{"id": 'Board2', "title": 'Board2'},
 					{"id": 'Board3', "title": 'Board3'},
 				],
-				items: [
-					{"boardId": 'Board1', "title": 'hi'},
-					{"boardId": 'Board1', "title": 'did'},
-					{"boardId": 'Board2', "title": 'you'},
-					{"boardId": 'notaboard', "title": 'know'},
-					{"boardId": 'Board2', "title": 'lily'},
-					{"boardId": 'Board3', "title": 'loves'},
-					{"boardId": 'Board2', "title": 'lia'},
-				]
+				itemFeed: "feed.json"
 			});
 
 
