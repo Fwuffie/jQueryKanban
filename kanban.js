@@ -9,10 +9,12 @@ class Kanban {
 		//add css class to div
 		$(this.kanbanEL).addClass('kanban-container');
 
-		this.readFeed();
-
 		//render the boards
 		this.renderBoards();
+
+		if (this.itemFeed) {
+			this.readFeed();
+		}
 	}
 
 	readFeed() {
@@ -25,7 +27,7 @@ class Kanban {
 		  	this.renderItems();
 		  },
 		  error: function(xhr, textStatus, errorThrown) {
-		  	
+		  	console.warn("Could not load Kanban feed")
 		  }
 		});
 		
