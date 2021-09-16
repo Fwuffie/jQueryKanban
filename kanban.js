@@ -81,8 +81,8 @@ class Kanban {
 										itemId: itemId,
 										itemData: this.items[itemId],
 										itemEl: ui.item,
-										newBoardId: boardKey,
-										newBoardData: boardValue,
+										newBoardId: newBoard,
+										newBoardData: this.boards[newBoard],
 										newBoardEl: ui.item.parent().parent(),
 									}
 
@@ -90,7 +90,14 @@ class Kanban {
 								}.bind(this)
 							})
 							.disableSelection()
-							.click( this.onClick )
+							.click((evt) => {
+								this.onClick({
+									itemId: $(evt.target).data('id'),
+									itemData: this.items[$(evt.target).data('id')],
+									itemEl: $(evt.target),
+								})
+								
+							})
 					])
 				.appendTo(this.el);
 		});

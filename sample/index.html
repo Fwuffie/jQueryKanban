@@ -14,9 +14,11 @@
 		$(document).ready(() => {
 			k = new Kanban($('#kanban'), {
 				enableScroll: true,
-				onMove: function(item, itemId) {
-					console.log(itemId);
+				onMove: function(item) {
 					console.log(item);
+				},
+				onClick: function(item) {
+					console.log(item)
 				},
 				boards: {
 					'Board1': {"title": 'Board1'},
