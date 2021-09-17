@@ -2,7 +2,7 @@
 	overflow-x: scroll;
 
 	/* Apperance */
-	background: lightgray;
+	background: white;
 
 	/* Layout */
 	display: flex;
@@ -16,7 +16,7 @@
 
 .kanban-board {
 	/* Apperance */
-	background: gray;
+	background: #b7b2b7;
 
 	/* Layout */
 	min-width: 20rem;
@@ -24,19 +24,22 @@
 
 	/* Spacing */
 	margin: 1em;
-	padding: 1em;
+	padding: 0.3em;
 	max-height: -webkit-fill-available;
 	display: flex;
 	flex-direction: column;
+	border-radius: 1em;
 }
 
 .kanban-title {
 	/* Apperance */
 	font-family: sans-serif;
-	font-size: 2em;
+	font-size: 1.5em;
 
 	/* Layout */
 	/* Spacing */
+	font-weight: 600;
+	padding: 0.1em 0.5em;
 }
 
 .kanban-items-container {
@@ -47,15 +50,37 @@
 	/* Spacing */
 	min-height: 2em;
 	overflow-y: auto;
+	background: white;
+	border-radius: 0.7em;
+	padding: 0em 0.5em;
 }
 
 .kanban-item {
 	/* Apperance */
+	font-size: 1em;
 	font-family: sans-serif;
-	background: darkgray;
+	background: #c7c7c7;
 
 	/* Layout */
 	/* Spacing */
-	padding: 0.5em;
-    margin: 0.5em;
+	padding: 0.4em;
+	margin: 0.5em 0em;
+	border-radius: 0.2em;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.8em;
+  border-radius: 0.7em;
+  position: relative;
+}
+
+/* Track */
+::-webkit-scrollbar-track {margin: 0.2em;}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 1em;
+  border: 0.2em solid white;
 }

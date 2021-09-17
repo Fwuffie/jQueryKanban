@@ -25,8 +25,6 @@ class Kanban {
 		}
 	}
 
-
-
 	enableSideScroll() {
 		$('.kanban-board').on('wheel', (event) => {
 				event.stopPropagation();
