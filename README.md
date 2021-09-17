@@ -18,11 +18,11 @@ jQuery kanban can be initialised like this;
 	<script>
 	origin/master
 	k = new Kanban($('#kanban'), {
-		boards: [
-					{"id": 'New', "title": 'New'},
-					{"id": 'In-Progress', "title": 'In Progress'},
-					{"id": 'Complete', "title": 'Complete'},
-				],
+		boards: {
+					'Board1': {"title": 'Board1'},
+					'Board2': {"title": 'Board2'},
+					'Board3': {"title": 'Board3'},
+				},
 		items: [
 					{"boardId": 'New', "title": 'Cuddle Stuffies'},
 					{"boardId": 'New', "title": 'Go For A Walk'},
@@ -40,7 +40,7 @@ jQuery kanban can be initialised like this;
 
 The board object defines a board for the kaban that can contain items.
 
-It requires the following necessary arguments.
+It requires the following necessary arguments and should be paired with a unique ID.
 
 |   Arg   | Description |
 |   ---   | ----------- |
@@ -89,7 +89,9 @@ The following is a list of args that can be included when adding a board:
 |   Arg   | Description |
 |   ---   | ----------- |
 | title   | The Title of the Board |
-| id      | The Id of the board |
+| color   | The Color of the board |
+
+Any other custom args can be added, these will be passed back on relevant function calls.
 
 ### Item Args Reference
 
@@ -99,3 +101,8 @@ The following is a list of args that can be included when adding an item:
 |   ---   | ----------- |
 | title   | The Title of the Board |
 | boardId | The Id of the board to append the item to |
+| color   | The Color of the board |
+| description   | A description to display under the title, note: if no description is added, title will display as description |
+| image   | A link to an image to display on the board |
+
+Any other custom args can be added, these will be passed back on relevant function calls.

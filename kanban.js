@@ -2,11 +2,18 @@ class Kanban {
 	constructor(el, args) {
 		this.el = el;
 		this.args = args;
-		this.boards = args.boards;
+
+		if (Array.isArray(args.boards)) {
+			this.boards = {};
+			args.boards.forEach((board, boardIndex) => {
+				this.boards[boardIndex] = board;
+			});
+		} else {
+			this.boards = args.boards;
+		}
+
+		
 		this.items = args.items;
-		this.onMove = args.onMove;
-		this.onClick = args.onClick;
-		this.itemFeed = args.itemFeed;
 
 		//add css class to div
 		$(this.el).addClass('kanban-container');
@@ -14,15 +21,49 @@ class Kanban {
 		//render the boards
 		this.renderBoards();
 
-
 		if (this.args.enableScroll === undefined || this.args.enableScroll) {
 			this.enableSideScroll()
 		}
 		
-
-		if (this.itemFeed) {
+		//render the Initial Items
+		if (this.args.itemFeed) {
 			this.readFeed();
+		} else {
+			this.addItems(this.items);
 		}
+	}
+
+
+	addItems(items){
+		items.forEach((item, itemId) => {
+			this.addItem(item, itemId);
+		})
+	}
+
+	addItem(item, itemId) {
+		const title = item.title;
+		const boardID = item.boardId;
+		const description = item.description;
+		const image = item.image;
+		let divContent = [];
+
+		if(image){
+			divContent.push( $("<img>").attr("src",image)[0] );
+		}
+
+		if(description){
+			divContent.push( $("<h3></h3>").text(title)[0] );
+			divContent.push( $("<p></p>").text(description)[0] );
+		} else {
+			divContent.push( $("<p></p>").text(title)[0] );
+		}
+
+		console.log(divContent);
+
+		$('<div></div>').addClass('kanban-item').data('id', itemId)
+			.css("background-color", item.color)
+			.html(divContent)
+			.appendTo("#" + boardID + " > .kanban-items-container");
 	}
 
 	enableSideScroll() {
@@ -38,31 +79,31 @@ class Kanban {
 
 	readFeed() {
 		$.ajax({
-		  url: this.itemFeed,
+		  url: this.args.itemFeed,
 		  type: 'GET',
 		  dataType: 'xml/html/script/json/jsonp',
 		  success: function(data, textStatus, xhr) {
-		  	this.itemFeed = data;
-		  	this.renderItems();
+		  	this.items = data;
+		  	this.addItems(this.items);
 		  },
 		  error: function(xhr, textStatus, errorThrown) {
 		  	console.warn("Could not load Kanban feed")
 		  }
-		});
-		
+		});		
 	}
 
 	renderBoards() {
 		$(this.el).empty();
 		Object.entries(this.boards).forEach((board) => {
-			const [boardKey, boardValue] = board;
+			const [boardId, boardData] = board;
 
-			const title = boardValue.title;
-			const id = boardKey;
+			const title = boardData.title;
+			const id = boardId;
 
 			$('<div></div>')
 				.addClass('kanban-board')
 				.attr("id", id)
+				.css("background-color", boardData.color)
 				.html([
 						$('<div></div>').addClass('kanban-title').html(title),
 						$('<div></div>').addClass('kanban-items-container').sortable({
@@ -84,12 +125,13 @@ class Kanban {
 										newBoardEl: ui.item.parent().parent(),
 									}
 
-									this.onMove(item)
+									this.args.onMove(item)
 								}.bind(this)
 							})
+							.accordion()
 							.disableSelection()
 							.click((evt) => {
-								this.onClick({
+								this.args.onClick({
 									itemId: $(evt.target).data('id'),
 									itemData: this.items[$(evt.target).data('id')],
 									itemEl: $(evt.target),
@@ -99,22 +141,9 @@ class Kanban {
 					])
 				.appendTo(this.el);
 		});
-
-		this.renderItems()
 	}
 
-	renderItems() {
-		this.items.forEach((item, itemId) => {
-			const title = item.title;
-			const boardID = item.boardId;
 
-			$('<div></div>').addClass('kanban-item').data('id', itemId)
-				.html(
-					title
-				).appendTo("#" + boardID + " > .kanban-items-container");
-
-		});
-	}
 
 
 

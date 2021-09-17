@@ -19,7 +19,8 @@
 	background: #b7b2b7;
 
 	/* Layout */
-	min-width: 20rem;
+	min-width: 20rem; /* Both required to stop flexbox shrink */
+	width: 20rem;
 	height: fit-content;
 
 	/* Spacing */
@@ -65,8 +66,25 @@
 	/* Spacing */
 	padding: 0.4em;
 	margin: 0.5em 0em;
+	border-radius: 0.3em;
+}
+
+.kanban-item > img  {
+	width: 100%;
 	border-radius: 0.2em;
 }
+
+.kanban-item > h3 {
+	margin: 0px;
+	margin-bottom: 0.5em;
+}
+
+.kanban-item > p {
+	margin: 0px;
+}
+
+
+/* Scrollbar */
 
 /* width */
 ::-webkit-scrollbar {
@@ -74,10 +92,8 @@
   border-radius: 0.7em;
   position: relative;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {margin: 0.2em;}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
