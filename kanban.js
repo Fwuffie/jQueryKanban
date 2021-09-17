@@ -109,12 +109,18 @@ class Kanban {
 						$('<div></div>').addClass('kanban-items-container').sortable({
 								connectWith: ".kanban-items-container",
 								stop: function(event, ui) {
+
 									var itemId = ui.item.data('id');
 
 									var newIndex = ui.item.index();
 									var newBoard = ui.item.parent().parent().attr('id');
+									var error;
 
-									this.items[itemId].boardId = newBoard;
+									try {
+										this.items[itemId].boardId = newBoard;
+									} catch (err) {
+										error = err;
+									}
 
 									var item = {
 										itemId: itemId,
@@ -125,7 +131,7 @@ class Kanban {
 										newBoardEl: ui.item.parent().parent(),
 									}
 
-									this.args.onMove(item)
+									this.args.onMove(item, error)
 								}.bind(this)
 							})
 							.accordion()
