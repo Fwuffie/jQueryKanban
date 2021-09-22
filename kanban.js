@@ -61,7 +61,9 @@ class Kanban {
 			.css("background-color", item.color)
 			.html(divContent)
 			.appendTo("#" + boardID + " > .kanban-items-container");
-		this.args.eventRenderer(itemDiv[0], item);
+			if (this.args.onRenderItem) {
+				this.args.onRenderItem(itemDiv[0], item);
+			}
 	}
 
 	enableSideScroll() {
