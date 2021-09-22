@@ -106,3 +106,4 @@ The following is a list of args that can be included when adding an item:
 | image   | A link to an image to display on the board |
 
 Any other custom args can be added, these will be passed back on relevant function calls.
+
